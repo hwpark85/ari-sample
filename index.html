@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLÜE — Clean Beauty</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0f172a;--body:#475569;--sub:#94a3b8;--bg:#ffffff;--ice:#f0f7ff;--sky:#e0effe;--blue:#2563eb;--blue-deep:#1d4ed8;--accent:#06b6d4;--glass:rgba(255,255,255,.55);--glass-border:rgba(255,255,255,.35);--glass-shadow:0 8px 32px rgba(37,99,235,.08);--pop:'Poppins',sans-serif;--kr:'Noto Sans KR',sans-serif;--display:'Playfair Display',serif}
+body{font-family:var(--kr);color:var(--body);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all;line-height:1.8}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.glass-btn{display:inline-block;padding:14px 32px;font-family:var(--pop);font-size:13px;font-weight:600;border-radius:14px;border:1.5px solid var(--glass-border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .35s ease;cursor:pointer;position:relative;overflow:hidden}
+.glass-btn::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(135deg,rgba(255,255,255,.3) 0%,transparent 50%);transform:rotate(45deg);pointer-events:none}
+.glass-btn-primary{background:linear-gradient(135deg,rgba(37,99,235,.85),rgba(79,70,229,.85));color:#fff;border-color:rgba(255,255,255,.2);box-shadow:0 4px 20px rgba(37,99,235,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+.glass-btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,99,235,.4),inset 0 1px 0 rgba(255,255,255,.3)}
+.glass-btn-ghost{background:var(--glass);color:var(--blue);border-color:rgba(37,99,235,.15);box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.5)}
+.glass-btn-ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.75);box-shadow:0 8px 28px rgba(37,99,235,.12)}
+.glass-btn-white{background:rgba(255,255,255,.9);color:var(--blue);border-color:rgba(255,255,255,.5);box-shadow:0 4px 20px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.8)}
+.glass-btn-white:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.15)}
+.glass-card{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.4);transition:all .4s ease}
+.glass-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(37,99,235,.1),inset 0 1px 0 rgba(255,255,255,.5)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.5);transition:all .3s}
+.nav-logo{font-family:var(--pop);font-size:20px;font-weight:700;color:var(--blue)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-family:var(--pop);font-size:13px;font-weight:500;color:var(--sub);transition:color .3s}
+.nav-links a:hover{color:var(--blue)}
+.nav-right{display:flex;gap:14px;align-items:center}
+.nav-right>a{font-family:var(--pop);font-size:13px;font-weight:500;color:var(--sub)}
+.hero{padding-top:68px;min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,var(--bg) 0%,var(--ice) 40%,var(--sky) 100%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.08) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.06) 0%,transparent 70%)}
+.hero-inner{max-width:1120px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-text{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:var(--glass);backdrop-filter:blur(12px);border:1px solid rgba(37,99,235,.1);border-radius:24px;font-family:var(--pop);font-size:12px;font-weight:600;color:var(--blue);margin-bottom:28px;box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.5);opacity:0;animation:fadeUp .7s ease .2s forwards}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:var(--display);font-size:clamp(36px,5.5vw,60px);font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:-1.5px;margin-bottom:20px;opacity:0;animation:fadeUp .7s ease .4s forwards}
+.hero h1 em{font-style:italic;color:var(--blue);position:relative}
+.hero h1 em::after{content:'';position:absolute;bottom:4px;left:0;width:100%;height:8px;background:rgba(37,99,235,.12);border-radius:4px;z-index:-1}
+.hero p{font-size:16px;font-weight:300;color:var(--body);line-height:1.9;margin-bottom:36px;opacity:0;animation:fadeUp .7s ease .6s forwards}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease .8s forwards}
+.hero-visual{position:relative;z-index:1;opacity:0;animation:fadeUp .7s ease .5s forwards}
+.hero-img-wrap{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(15,23,42,.1)}
+.hero-float{position:absolute;padding:12px 20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.5);border-radius:14px;box-shadow:0 8px 24px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.6);font-family:var(--pop);font-size:12px;font-weight:600}
+.hero-float-1{top:20%;right:-20px;color:var(--blue);animation:float 3s ease-in-out infinite}
+.hero-float-2{bottom:15%;left:-16px;color:var(--accent);animation:float 3s ease-in-out infinite .5s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.sh{text-align:center;margin-bottom:56px}
+.sh-tag{font-family:var(--pop);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.sh h2{font-family:var(--display);font-size:clamp(26px,4vw,40px);font-weight:600;color:var(--ink);letter-spacing:-1px}
+.sh p{font-size:15px;font-weight:300;color:var(--sub);margin-top:12px}
+.categories{padding:100px 48px;background:var(--bg)}
+.cat-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.cat-card{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;cursor:pointer}
+.cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.cat-card:hover img{transform:scale(1.06)}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:55%;background:linear-gradient(transparent,rgba(15,23,42,.55))}
+.cat-label{position:absolute;bottom:0;left:0;right:0;z-index:1;padding:20px}
+.cat-label-inner{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:16px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+.cat-label h3{font-family:var(--pop);font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
+.cat-label p{font-family:var(--pop);font-size:11px;font-weight:400;color:rgba(255,255,255,.6)}
+.products{padding:100px 48px;background:var(--ice)}
+.prod-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.prod-card{border-radius:20px;overflow:hidden;transition:all .4s ease}
+.prod-card:hover{transform:translateY(-6px)}
+.prod-img{aspect-ratio:1/1;overflow:hidden;position:relative;background:var(--sky)}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod-card:hover .prod-img img{transform:scale(1.05)}
+.prod-tag{position:absolute;top:12px;left:12px;padding:5px 12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(37,99,235,.75);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:var(--pop);font-size:10px;font-weight:600;border-radius:10px;box-shadow:0 4px 12px rgba(37,99,235,.2),inset 0 1px 0 rgba(255,255,255,.15)}
+.prod-info{padding:20px;background:var(--glass);backdrop-filter:blur(8px);border:1px solid var(--glass-border);border-top:none;border-radius:0 0 20px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.prod-brand{font-family:var(--pop);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.prod-name{font-family:var(--kr);font-size:15px;font-weight:500;color:var(--ink);margin-bottom:10px}
+.prod-bottom{display:flex;justify-content:space-between;align-items:center}
+.prod-price{font-family:var(--pop);font-size:16px;font-weight:700;color:var(--ink)}
+.prod-cart{width:38px;height:38px;border-radius:12px;backdrop-filter:blur(8px);background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.1);display:flex;align-items:center;justify-content:center;transition:all .3s;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+.prod-cart:hover{background:linear-gradient(135deg,rgba(37,99,235,.85),rgba(79,70,229,.85));border-color:rgba(255,255,255,.15);box-shadow:0 4px 12px rgba(37,99,235,.25)}
+.prod-cart:hover svg path{stroke:#fff}
+.promo{padding:80px 48px;background:var(--bg)}
+.promo-inner{max-width:1120px;margin:0 auto;padding:64px;background:linear-gradient(135deg,var(--blue) 0%,#4f46e5 50%,var(--accent) 100%);border-radius:28px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.promo-inner::before{content:'';position:absolute;top:-40%;right:-15%;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.04)}
+.promo-inner::after{content:'';position:absolute;bottom:-30%;left:10%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04)}
+.promo-text{position:relative;z-index:1}
+.promo h2{font-family:var(--display);font-size:clamp(24px,3.5vw,36px);font-weight:600;color:#fff;line-height:1.35;margin-bottom:16px}
+.promo p{font-size:15px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:28px}
+.promo-stats{display:flex;gap:24px;position:relative;z-index:1;flex-wrap:wrap}
+.promo-stat{text-align:center;padding:20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);min-width:100px}
+.promo-stat-num{font-family:var(--pop);font-size:32px;font-weight:700;color:#fff;line-height:1.2}
+.promo-stat-label{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);margin-top:4px}
+.reviews{padding:100px 48px;background:var(--bg)}
+.rev-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.rev-card{padding:32px 28px;border-radius:20px}
+.rev-stars{color:var(--blue);font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.rev-text{font-size:14px;font-weight:300;color:var(--body);line-height:1.8;margin-bottom:20px}
+.rev-author{font-family:var(--pop);font-size:13px;font-weight:600;color:var(--ink)}
+.rev-date{font-size:12px;color:var(--sub);margin-top:2px}
+.footer{padding:64px 48px 36px;background:var(--ink);color:rgba(255,255,255,.25)}
+.ft-top{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:24px}
+.ft-logo{font-family:var(--pop);font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.ft-logo span{color:var(--accent)}
+.ft-desc{font-size:13px;font-weight:300;max-width:260px;line-height:1.8}
+.ft-nav{display:flex;gap:56px}
+.ft-nav-title{font-family:var(--pop);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px}
+.ft-nav a{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.25);margin-bottom:10px;transition:color .3s}
+.ft-nav a:hover{color:var(--accent)}
+.ft-copy{max-width:1120px;margin:0 auto;font-size:11px;text-align:center}
+.sample-badge{position:fixed;bottom:24px;right:24px;z-index:999;padding:12px 24px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(37,99,235,.8);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:var(--pop);font-size:11px;font-weight:600;border-radius:14px;box-shadow:0 4px 20px rgba(37,99,235,.3),inset 0 1px 0 rgba(255,255,255,.15)}
+@media(max-width:768px){
+  .nav{padding:0 20px;height:60px}
+  .nav-links{display:none}
+  .hero-inner{grid-template-columns:1fr;gap:40px;padding:40px 24px}
+  .hero-visual{order:-1}
+  .hero-float{display:none}
+  .cat-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .cat-card{aspect-ratio:2/3}
+  .prod-grid{grid-template-columns:1fr 1fr;gap:16px}
+  .promo-inner{grid-template-columns:1fr;padding:40px 28px}
+  .promo-stats{justify-content:center}
+  .rev-grid{grid-template-columns:1fr;gap:16px}
+  .categories,.products,.promo,.reviews{padding:72px 20px}
+  .ft-top{flex-direction:column;gap:32px}
+  .ft-nav{flex-direction:column;gap:24px}
+  .footer{padding:48px 20px 28px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">BLÜE<span>.</span></a>
+  <div class="nav-links"><a href="#">New</a><a href="#">Skincare</a><a href="#">Bodycare</a><a href="#">Sets</a><a href="#">About</a></div>
+  <div class="nav-right"><a href="#">Search</a><a href="#" class="glass-btn glass-btn-primary" style="padding:8px 20px;font-size:12px;border-radius:12px;">Cart (2)</a></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-badge">New Season 2026</span>
+      <h1>Clean beauty,<br><em>real results</em></h1>
+      <p>피부에 진짜 필요한 것만 담았습니다.<br>깨끗한 성분, 확실한 효과. 블루가 약속합니다.</p>
+      <div class="hero-btns">
+        <a href="#" class="glass-btn glass-btn-primary">Shop Now</a>
+        <a href="#" class="glass-btn glass-btn-ghost">Our Ingredients</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80" alt="Beauty products collection">
+      </div>
+      <div class="hero-float hero-float-1">Vegan Certified</div>
+      <div class="hero-float hero-float-2">pH 5.5 Balanced</div>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="sh rv"><p class="sh-tag">Categories</p><h2>Shop by Category</h2></div>
+  <div class="cat-grid">
+    <div class="cat-card rv">
+      <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80" alt="Cleanser">
+      <div class="cat-label"><div class="cat-label-inner"><h3>Cleanser</h3><p>클렌징 라인</p></div></div>
+    </div>
+    <div class="cat-card rv">
+      <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80" alt="Serum">
+      <div class="cat-label"><div class="cat-label-inner"><h3>Serum</h3><p>세럼 & 앰플</p></div></div>
+    </div>
+    <div class="cat-card rv">
+      <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&q=80" alt="Moisturizer">
+      <div class="cat-label"><div class="cat-label-inner"><h3>Moisturizer</h3><p>수분 크림</p></div></div>
+    </div>
+    <div class="cat-card rv">
+      <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80" alt="Sun Care">
+      <div class="cat-label"><div class="cat-label-inner"><h3>Sun Care</h3><p>자외선 차단</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="products">
+  <div class="sh rv"><p class="sh-tag">Best Sellers</p><h2>Most Loved Products</h2><p>고객들이 가장 사랑하는 제품을 만나보세요</p></div>
+  <div class="prod-grid">
+    <div class="prod-card glass-card rv">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=600&q=80" alt="Serum">
+        <span class="prod-tag">BEST</span>
+      </div>
+      <div class="prod-info">
+        <p class="prod-brand">Blüe</p>
+        <p class="prod-name">아쿠아 히알루론 세럼 30ml</p>
+        <div class="prod-bottom"><span class="prod-price">48,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+      </div>
+    </div>
+    <div class="prod-card glass-card rv">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80" alt="Cream">
+        <span class="prod-tag">NEW</span>
+      </div>
+      <div class="prod-info">
+        <p class="prod-brand">Blüe</p>
+        <p class="prod-name">딥 모이스처 크림 50ml</p>
+        <div class="prod-bottom"><span class="prod-price">62,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+      </div>
+    </div>
+    <div class="prod-card glass-card rv">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80" alt="Cleanser">
+      </div>
+      <div class="prod-info">
+        <p class="prod-brand">Blüe</p>
+        <p class="prod-name">젠틀 버블 클렌저 200ml</p>
+        <div class="prod-bottom"><span class="prod-price">32,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+      </div>
+    </div>
+    <div class="prod-card glass-card rv">
+      <div class="prod-img">
+        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80" alt="Sunscreen">
+        <span class="prod-tag">SALE</span>
+      </div>
+      <div class="prod-info">
+        <p class="prod-brand">Blüe</p>
+        <p class="prod-name">에어리 선크림 SPF50+ 60ml</p>
+        <div class="prod-bottom"><span class="prod-price">28,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:48px;" class="rv"><a href="#" class="glass-btn glass-btn-ghost">View All Products</a></div>
+</section>
+
+<section class="promo">
+  <div class="promo-inner rv">
+    <div class="promo-text">
+      <h2>First Order<br>Special Offer</h2>
+      <p>첫 구매 고객님께 15% 할인과 무료 배송을 드립니다.<br>클린 뷰티의 첫 경험을 블루와 함께하세요.</p>
+      <a href="#" class="glass-btn glass-btn-white">Get 15% Off</a>
+    </div>
+    <div class="promo-stats">
+      <div class="promo-stat"><p class="promo-stat-num">98%</p><p class="promo-stat-label">자연 유래 성분</p></div>
+      <div class="promo-stat"><p class="promo-stat-num">0</p><p class="promo-stat-label">유해 성분</p></div>
+      <div class="promo-stat"><p class="promo-stat-num">4.9</p><p class="promo-stat-label">평균 평점</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="sh rv"><p class="sh-tag">Reviews</p><h2>Real Stories</h2></div>
+  <div class="rev-grid">
+    <div class="rev-card glass-card rv"><p class="rev-stars">★★★★★</p><p class="rev-text">"세럼 텍스처가 정말 가벼운데 다음날 피부가 확 달라요. 이제 다른 거 못 써요."</p><p class="rev-author">김지현</p><p class="rev-date">2026.03.15</p></div>
+    <div class="rev-card glass-card rv"><p class="rev-stars">★★★★★</p><p class="rev-text">"민감성인데 자극 하나도 없었어요. 패키지도 예쁘고 성분도 깨끗해서 만족합니다."</p><p class="rev-author">박소영</p><p class="rev-date">2026.03.12</p></div>
+    <div class="rev-card glass-card rv"><p class="rev-stars">★★★★★</p><p class="rev-text">"선크림이 진짜 가벼워요. 백탁 없고 촉촉해서 매일 쓰고 있어요. 재구매 확정!"</p><p class="rev-author">이서연</p><p class="rev-date">2026.03.08</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="ft-top">
+    <div><p class="ft-logo">BLÜE<span>.</span></p><p class="ft-desc">피부에 진짜 필요한 것만 담은 클린 뷰티 브랜드</p></div>
+    <div class="ft-nav">
+      <div><p class="ft-nav-title">Shop</p><a href="#">Cleanser</a><a href="#">Serum</a><a href="#">Moisturizer</a><a href="#">Sun Care</a></div>
+      <div><p class="ft-nav-title">Brand</p><a href="#">Our Story</a><a href="#">Ingredients</a><a href="#">Sustainability</a></div>
+      <div><p class="ft-nav-title">Help</p><a href="#">FAQ</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a></div>
+    </div>
+  </div>
+  <p class="ft-copy">© 2026 BLÜE. All rights reserved. — This is a sample website by ARI Project</p>
+</footer>
+
+<div class="sample-badge">ARI Project — Sample Website</div>
+
+<script>
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+window.addEventListener('scroll',function(){var n=document.querySelector('.nav');if(window.scrollY>60){n.style.boxShadow='0 2px 20px rgba(0,0,0,.04)';}else{n.style.boxShadow='none';}});
+</script>
+</body>
+</html>
