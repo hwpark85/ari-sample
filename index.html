@@ -1,277 +1,623 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BLÜE — Clean Beauty</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#0f172a;--body:#475569;--sub:#94a3b8;--bg:#ffffff;--ice:#f0f7ff;--sky:#e0effe;--blue:#2563eb;--blue-deep:#1d4ed8;--accent:#06b6d4;--glass:rgba(255,255,255,.55);--glass-border:rgba(255,255,255,.35);--glass-shadow:0 8px 32px rgba(37,99,235,.08);--pop:'Poppins',sans-serif;--kr:'Noto Sans KR',sans-serif;--display:'Playfair Display',serif}
-body{font-family:var(--kr);color:var(--body);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all;line-height:1.8}
-a{text-decoration:none;color:inherit}
-img{display:block;width:100%}
-.rv{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
-.rv.vis{opacity:1;transform:translateY(0)}
-.glass-btn{display:inline-block;padding:14px 32px;font-family:var(--pop);font-size:13px;font-weight:600;border-radius:14px;border:1.5px solid var(--glass-border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .35s ease;cursor:pointer;position:relative;overflow:hidden}
-.glass-btn::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(135deg,rgba(255,255,255,.3) 0%,transparent 50%);transform:rotate(45deg);pointer-events:none}
-.glass-btn-primary{background:linear-gradient(135deg,rgba(37,99,235,.85),rgba(79,70,229,.85));color:#fff;border-color:rgba(255,255,255,.2);box-shadow:0 4px 20px rgba(37,99,235,.3),inset 0 1px 0 rgba(255,255,255,.2)}
-.glass-btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,99,235,.4),inset 0 1px 0 rgba(255,255,255,.3)}
-.glass-btn-ghost{background:var(--glass);color:var(--blue);border-color:rgba(37,99,235,.15);box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.5)}
-.glass-btn-ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.75);box-shadow:0 8px 28px rgba(37,99,235,.12)}
-.glass-btn-white{background:rgba(255,255,255,.9);color:var(--blue);border-color:rgba(255,255,255,.5);box-shadow:0 4px 20px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.8)}
-.glass-btn-white:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.15)}
-.glass-card{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.4);transition:all .4s ease}
-.glass-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(37,99,235,.1),inset 0 1px 0 rgba(255,255,255,.5)}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.5);transition:all .3s}
-.nav-logo{font-family:var(--pop);font-size:20px;font-weight:700;color:var(--blue)}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:28px}
-.nav-links a{font-family:var(--pop);font-size:13px;font-weight:500;color:var(--sub);transition:color .3s}
-.nav-links a:hover{color:var(--blue)}
-.nav-right{display:flex;gap:14px;align-items:center}
-.nav-right>a{font-family:var(--pop);font-size:13px;font-weight:500;color:var(--sub)}
-.hero{padding-top:68px;min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,var(--bg) 0%,var(--ice) 40%,var(--sky) 100%);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.08) 0%,transparent 70%)}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.06) 0%,transparent 70%)}
-.hero-inner{max-width:1120px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.hero-text{position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:var(--glass);backdrop-filter:blur(12px);border:1px solid rgba(37,99,235,.1);border-radius:24px;font-family:var(--pop);font-size:12px;font-weight:600;color:var(--blue);margin-bottom:28px;box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.5);opacity:0;animation:fadeUp .7s ease .2s forwards}
-.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-family:var(--display);font-size:clamp(36px,5.5vw,60px);font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:-1.5px;margin-bottom:20px;opacity:0;animation:fadeUp .7s ease .4s forwards}
-.hero h1 em{font-style:italic;color:var(--blue);position:relative}
-.hero h1 em::after{content:'';position:absolute;bottom:4px;left:0;width:100%;height:8px;background:rgba(37,99,235,.12);border-radius:4px;z-index:-1}
-.hero p{font-size:16px;font-weight:300;color:var(--body);line-height:1.9;margin-bottom:36px;opacity:0;animation:fadeUp .7s ease .6s forwards}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease .8s forwards}
-.hero-visual{position:relative;z-index:1;opacity:0;animation:fadeUp .7s ease .5s forwards}
-.hero-img-wrap{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(15,23,42,.1)}
-.hero-float{position:absolute;padding:12px 20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.5);border-radius:14px;box-shadow:0 8px 24px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.6);font-family:var(--pop);font-size:12px;font-weight:600}
-.hero-float-1{top:20%;right:-20px;color:var(--blue);animation:float 3s ease-in-out infinite}
-.hero-float-2{bottom:15%;left:-16px;color:var(--accent);animation:float 3s ease-in-out infinite .5s}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.sh{text-align:center;margin-bottom:56px}
-.sh-tag{font-family:var(--pop);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
-.sh h2{font-family:var(--display);font-size:clamp(26px,4vw,40px);font-weight:600;color:var(--ink);letter-spacing:-1px}
-.sh p{font-size:15px;font-weight:300;color:var(--sub);margin-top:12px}
-.categories{padding:100px 48px;background:var(--bg)}
-.cat-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.cat-card{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;cursor:pointer}
-.cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.cat-card:hover img{transform:scale(1.06)}
-.cat-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:55%;background:linear-gradient(transparent,rgba(15,23,42,.55))}
-.cat-label{position:absolute;bottom:0;left:0;right:0;z-index:1;padding:20px}
-.cat-label-inner{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:16px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
-.cat-label h3{font-family:var(--pop);font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
-.cat-label p{font-family:var(--pop);font-size:11px;font-weight:400;color:rgba(255,255,255,.6)}
-.products{padding:100px 48px;background:var(--ice)}
-.prod-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.prod-card{border-radius:20px;overflow:hidden;transition:all .4s ease}
-.prod-card:hover{transform:translateY(-6px)}
-.prod-img{aspect-ratio:1/1;overflow:hidden;position:relative;background:var(--sky)}
-.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.prod-card:hover .prod-img img{transform:scale(1.05)}
-.prod-tag{position:absolute;top:12px;left:12px;padding:5px 12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(37,99,235,.75);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:var(--pop);font-size:10px;font-weight:600;border-radius:10px;box-shadow:0 4px 12px rgba(37,99,235,.2),inset 0 1px 0 rgba(255,255,255,.15)}
-.prod-info{padding:20px;background:var(--glass);backdrop-filter:blur(8px);border:1px solid var(--glass-border);border-top:none;border-radius:0 0 20px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
-.prod-brand{font-family:var(--pop);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
-.prod-name{font-family:var(--kr);font-size:15px;font-weight:500;color:var(--ink);margin-bottom:10px}
-.prod-bottom{display:flex;justify-content:space-between;align-items:center}
-.prod-price{font-family:var(--pop);font-size:16px;font-weight:700;color:var(--ink)}
-.prod-cart{width:38px;height:38px;border-radius:12px;backdrop-filter:blur(8px);background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.1);display:flex;align-items:center;justify-content:center;transition:all .3s;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
-.prod-cart:hover{background:linear-gradient(135deg,rgba(37,99,235,.85),rgba(79,70,229,.85));border-color:rgba(255,255,255,.15);box-shadow:0 4px 12px rgba(37,99,235,.25)}
-.prod-cart:hover svg path{stroke:#fff}
-.promo{padding:80px 48px;background:var(--bg)}
-.promo-inner{max-width:1120px;margin:0 auto;padding:64px;background:linear-gradient(135deg,var(--blue) 0%,#4f46e5 50%,var(--accent) 100%);border-radius:28px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
-.promo-inner::before{content:'';position:absolute;top:-40%;right:-15%;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.04)}
-.promo-inner::after{content:'';position:absolute;bottom:-30%;left:10%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04)}
-.promo-text{position:relative;z-index:1}
-.promo h2{font-family:var(--display);font-size:clamp(24px,3.5vw,36px);font-weight:600;color:#fff;line-height:1.35;margin-bottom:16px}
-.promo p{font-size:15px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:28px}
-.promo-stats{display:flex;gap:24px;position:relative;z-index:1;flex-wrap:wrap}
-.promo-stat{text-align:center;padding:20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);min-width:100px}
-.promo-stat-num{font-family:var(--pop);font-size:32px;font-weight:700;color:#fff;line-height:1.2}
-.promo-stat-label{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);margin-top:4px}
-.reviews{padding:100px 48px;background:var(--bg)}
-.rev-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.rev-card{padding:32px 28px;border-radius:20px}
-.rev-stars{color:var(--blue);font-size:14px;letter-spacing:2px;margin-bottom:14px}
-.rev-text{font-size:14px;font-weight:300;color:var(--body);line-height:1.8;margin-bottom:20px}
-.rev-author{font-family:var(--pop);font-size:13px;font-weight:600;color:var(--ink)}
-.rev-date{font-size:12px;color:var(--sub);margin-top:2px}
-.footer{padding:64px 48px 36px;background:var(--ink);color:rgba(255,255,255,.25)}
-.ft-top{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:24px}
-.ft-logo{font-family:var(--pop);font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
-.ft-logo span{color:var(--accent)}
-.ft-desc{font-size:13px;font-weight:300;max-width:260px;line-height:1.8}
-.ft-nav{display:flex;gap:56px}
-.ft-nav-title{font-family:var(--pop);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px}
-.ft-nav a{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.25);margin-bottom:10px;transition:color .3s}
-.ft-nav a:hover{color:var(--accent)}
-.ft-copy{max-width:1120px;margin:0 auto;font-size:11px;text-align:center}
-.sample-badge{position:fixed;bottom:24px;right:24px;z-index:999;padding:12px 24px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(37,99,235,.8);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:var(--pop);font-size:11px;font-weight:600;border-radius:14px;box-shadow:0 4px 20px rgba(37,99,235,.3),inset 0 1px 0 rgba(255,255,255,.15)}
-@media(max-width:768px){
-  .nav{padding:0 20px;height:60px}
-  .nav-links{display:none}
-  .hero-inner{grid-template-columns:1fr;gap:40px;padding:40px 24px}
-  .hero-visual{order:-1}
-  .hero-float{display:none}
-  .cat-grid{grid-template-columns:1fr 1fr;gap:12px}
-  .cat-card{aspect-ratio:2/3}
-  .prod-grid{grid-template-columns:1fr 1fr;gap:16px}
-  .promo-inner{grid-template-columns:1fr;padding:40px 28px}
-  .promo-stats{justify-content:center}
-  .rev-grid{grid-template-columns:1fr;gap:16px}
-  .categories,.products,.promo,.reviews{padding:72px 20px}
-  .ft-top{flex-direction:column;gap:32px}
-  .ft-nav{flex-direction:column;gap:24px}
-  .footer{padding:48px 20px 28px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THAI VOGUE — เสื้อยืดผู้ชาย | แฟชั่นสไตล์ไทย</title>
+  <meta name="description" content="ช้อปเสื้อยืดผู้ชายแบบแคชชวล สไตล์ไทยสุดพรีเมียม คุณภาพเยี่ยม ราคาคุ้มค่า จัดส่งฟรีทั่วไทย">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="nav">
-  <a href="#" class="nav-logo">BLÜE<span>.</span></a>
-  <div class="nav-links"><a href="#">New</a><a href="#">Skincare</a><a href="#">Bodycare</a><a href="#">Sets</a><a href="#">About</a></div>
-  <div class="nav-right"><a href="#">Search</a><a href="#" class="glass-btn glass-btn-primary" style="padding:8px 20px;font-size:12px;border-radius:12px;">Cart (2)</a></div>
-</nav>
-
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <span class="hero-badge">New Season 2026</span>
-      <h1>Clean beauty,<br><em>real results</em></h1>
-      <p>피부에 진짜 필요한 것만 담았습니다.<br>깨끗한 성분, 확실한 효과. 블루가 약속합니다.</p>
-      <div class="hero-btns">
-        <a href="#" class="glass-btn glass-btn-primary">Shop Now</a>
-        <a href="#" class="glass-btn glass-btn-ghost">Our Ingredients</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-img-wrap">
-        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80" alt="Beauty products collection">
-      </div>
-      <div class="hero-float hero-float-1">Vegan Certified</div>
-      <div class="hero-float hero-float-2">pH 5.5 Balanced</div>
-    </div>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <p><span>ส่งฟรีทั่วไทย</span> เมื่อสั่งซื้อขั้นต่ำ ฿599 | ใช้โค้ด <span>THAI50</span> ลดเพิ่ม 50 บาท</p>
   </div>
-</section>
 
-<section class="categories">
-  <div class="sh rv"><p class="sh-tag">Categories</p><h2>Shop by Category</h2></div>
-  <div class="cat-grid">
-    <div class="cat-card rv">
-      <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80" alt="Cleanser">
-      <div class="cat-label"><div class="cat-label-inner"><h3>Cleanser</h3><p>클렌징 라인</p></div></div>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">TV</div>
+        <div class="logo-text">THAI <span>VOGUE</span></div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#home">หน้าแรก</a>
+        <a href="#categories">หมวดหมู่</a>
+        <a href="#products">สินค้า</a>
+        <a href="#new-arrivals">สินค้าใหม่</a>
+        <a href="#promo">โปรโมชั่น</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-action-btn" id="searchBtn" aria-label="ค้นหา">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="nav-action-btn" id="wishlistBtn" aria-label="สิ่งที่อยากได้">
+          ♡
+        </button>
+        <button class="nav-action-btn" id="cartBtn" aria-label="ตะกร้า">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="เมนู">
+          ☰
+        </button>
+      </div>
     </div>
-    <div class="cat-card rv">
-      <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80" alt="Serum">
-      <div class="cat-label"><div class="cat-label-inner"><h3>Serum</h3><p>세럼 & 앰플</p></div></div>
-    </div>
-    <div class="cat-card rv">
-      <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&q=80" alt="Moisturizer">
-      <div class="cat-label"><div class="cat-label-inner"><h3>Moisturizer</h3><p>수분 크림</p></div></div>
-    </div>
-    <div class="cat-card rv">
-      <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80" alt="Sun Care">
-      <div class="cat-label"><div class="cat-label-inner"><h3>Sun Care</h3><p>자외선 차단</p></div></div>
-    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" id="closeMenuBtn">✕</button>
+    <a href="#home">หน้าแรก</a>
+    <a href="#categories">หมวดหมู่</a>
+    <a href="#products">สินค้า</a>
+    <a href="#new-arrivals">สินค้าใหม่</a>
+    <a href="#promo">โปรโมชั่น</a>
   </div>
-</section>
 
-<section class="products">
-  <div class="sh rv"><p class="sh-tag">Best Sellers</p><h2>Most Loved Products</h2><p>고객들이 가장 사랑하는 제품을 만나보세요</p></div>
-  <div class="prod-grid">
-    <div class="prod-card glass-card rv">
-      <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=600&q=80" alt="Serum">
-        <span class="prod-tag">BEST</span>
-      </div>
-      <div class="prod-info">
-        <p class="prod-brand">Blüe</p>
-        <p class="prod-name">아쿠아 히알루론 세럼 30ml</p>
-        <div class="prod-bottom"><span class="prod-price">48,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="images/hero_banner.png" alt="Thai Vogue Hero" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          คอลเลกชั่นใหม่ 2026
+        </div>
+        <h1>
+          เสื้อยืดผู้ชาย<br>
+          <span class="highlight">สไตล์ไทย</span> สุดพรีเมียม
+        </h1>
+        <p class="hero-desc">
+          ผ้าฝ้ายออร์แกนิก 100% งานตัดเย็บเกรดส่งออก ดีไซน์ที่ได้แรงบันดาลใจจากวัฒนธรรมไทยร่วมสมัย ใส่สบายตลอดวัน
+        </p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary">ช้อปเลย</a>
+          <a href="#new-arrivals" class="btn btn-outline">ดูสินค้าใหม่ →</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="number">10K+</span>
+            <span class="label">ลูกค้าทั่วไทย</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">500+</span>
+            <span class="label">ดีไซน์สุดเท่</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">4.9★</span>
+            <span class="label">คะแนนรีวิว</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="prod-card glass-card rv">
-      <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80" alt="Cream">
-        <span class="prod-tag">NEW</span>
-      </div>
-      <div class="prod-info">
-        <p class="prod-brand">Blüe</p>
-        <p class="prod-name">딥 모이스처 크림 50ml</p>
-        <div class="prod-bottom"><span class="prod-price">62,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-      </div>
-    </div>
-    <div class="prod-card glass-card rv">
-      <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80" alt="Cleanser">
-      </div>
-      <div class="prod-info">
-        <p class="prod-brand">Blüe</p>
-        <p class="prod-name">젠틀 버블 클렌저 200ml</p>
-        <div class="prod-bottom"><span class="prod-price">32,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-      </div>
-    </div>
-    <div class="prod-card glass-card rv">
-      <div class="prod-img">
-        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80" alt="Sunscreen">
-        <span class="prod-tag">SALE</span>
-      </div>
-      <div class="prod-info">
-        <p class="prod-brand">Blüe</p>
-        <p class="prod-name">에어리 선크림 SPF50+ 60ml</p>
-        <div class="prod-bottom"><span class="prod-price">28,000원</span><div class="prod-cart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-      </div>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:48px;" class="rv"><a href="#" class="glass-btn glass-btn-ghost">View All Products</a></div>
-</section>
+  </section>
 
-<section class="promo">
-  <div class="promo-inner rv">
-    <div class="promo-text">
-      <h2>First Order<br>Special Offer</h2>
-      <p>첫 구매 고객님께 15% 할인과 무료 배송을 드립니다.<br>클린 뷰티의 첫 경험을 블루와 함께하세요.</p>
-      <a href="#" class="glass-btn glass-btn-white">Get 15% Off</a>
+  <!-- Features / USP -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-item fade-in">
+          <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h4>จัดส่งฟรีทั่วไทย</h4>
+          <p>สั่งซื้อขั้นต่ำ ฿599</p>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+          <h4>เปลี่ยนคืนใน 30 วัน</h4>
+          <p>ไม่พอใจยินดีคืนเงิน</p>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h4>คุณภาพพรีเมียม</h4>
+          <p>ผ้าฝ้ายออร์แกนิก 100%</p>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h4>บริการ 24/7</h4>
+          <p>ทีมดูแลลูกค้าตลอดวัน</p>
+        </div>
+      </div>
     </div>
-    <div class="promo-stats">
-      <div class="promo-stat"><p class="promo-stat-num">98%</p><p class="promo-stat-label">자연 유래 성분</p></div>
-      <div class="promo-stat"><p class="promo-stat-num">0</p><p class="promo-stat-label">유해 성분</p></div>
-      <div class="promo-stat"><p class="promo-stat-num">4.9</p><p class="promo-stat-label">평균 평점</p></div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories" id="categories">
+    <div class="container">
+      <div class="section-header thai-ornament">
+        <h2>หมวดหมู่สินค้า</h2>
+        <p class="subtitle">เลือกช้อปตามสไตล์ที่ชอบ</p>
+        <div class="section-divider">
+          <span></span>
+          <div class="diamond"></div>
+          <span></span>
+        </div>
+      </div>
+      <div class="category-grid">
+        <div class="category-card fade-in">
+          <div class="card-icon">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 1 .84H6v10h12V10h2.14a1 1 0 0 0 1-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg></div>
+            <h3>เสื้อยืดเรียบๆ</h3>
+            <p>120+ แบบ</p>
+          </div>
+        </div>
+        <div class="category-card fade-in" style="background: linear-gradient(135deg, #2D3748, #1A365D);">
+          <div class="card-icon">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
+            <h3>เสื้อยืดลาย</h3>
+            <p>85+ แบบ</p>
+          </div>
+        </div>
+        <div class="category-card fade-in" style="background: linear-gradient(135deg, #553C2F, #7B341E);">
+          <div class="card-icon">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5L17.5 17.5"/><path d="M7 12L12 7"/><path d="M12 17L17 12"/><circle cx="12" cy="12" r="10"/></svg></div>
+            <h3>เสื้อออกกำลังกาย</h3>
+            <p>60+ แบบ</p>
+          </div>
+        </div>
+        <div class="category-card fade-in" style="background: linear-gradient(135deg, #1A4731, #276749);">
+          <div class="card-icon">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>โปโลชาย</h3>
+            <p>45+ แบบ</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="reviews">
-  <div class="sh rv"><p class="sh-tag">Reviews</p><h2>Real Stories</h2></div>
-  <div class="rev-grid">
-    <div class="rev-card glass-card rv"><p class="rev-stars">★★★★★</p><p class="rev-text">"세럼 텍스처가 정말 가벼운데 다음날 피부가 확 달라요. 이제 다른 거 못 써요."</p><p class="rev-author">김지현</p><p class="rev-date">2026.03.15</p></div>
-    <div class="rev-card glass-card rv"><p class="rev-stars">★★★★★</p><p class="rev-text">"민감성인데 자극 하나도 없었어요. 패키지도 예쁘고 성분도 깨끗해서 만족합니다."</p><p class="rev-author">박소영</p><p class="rev-date">2026.03.12</p></div>
-    <div class="rev-card glass-card rv"><p class="rev-stars">★★★★★</p><p class="rev-text">"선크림이 진짜 가벼워요. 백탁 없고 촉촉해서 매일 쓰고 있어요. 재구매 확정!"</p><p class="rev-author">이서연</p><p class="rev-date">2026.03.08</p></div>
-  </div>
-</section>
+  <!-- Best Sellers -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-header thai-ornament">
+        <h2>สินค้าขายดี</h2>
+        <p class="subtitle">เสื้อยืดที่ได้รับความนิยมสูงสุด</p>
+        <div class="section-divider">
+          <span></span>
+          <div class="diamond"></div>
+          <span></span>
+        </div>
+      </div>
+      <div class="product-grid">
 
-<footer class="footer">
-  <div class="ft-top">
-    <div><p class="ft-logo">BLÜE<span>.</span></p><p class="ft-desc">피부에 진짜 필요한 것만 담은 클린 뷰티 브랜드</p></div>
-    <div class="ft-nav">
-      <div><p class="ft-nav-title">Shop</p><a href="#">Cleanser</a><a href="#">Serum</a><a href="#">Moisturizer</a><a href="#">Sun Care</a></div>
-      <div><p class="ft-nav-title">Brand</p><a href="#">Our Story</a><a href="#">Ingredients</a><a href="#">Sustainability</a></div>
-      <div><p class="ft-nav-title">Help</p><a href="#">FAQ</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a></div>
+        <!-- Product 1 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_navy.png" alt="เสื้อยืดคอกลม สีกรมท่า" loading="lazy">
+            <span class="product-badge badge-best">ขายดี</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="1">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม ผ้าฝ้ายพรีเมียม สีกรมท่า</p>
+            <div class="product-price">
+              <span class="current">฿390</span>
+              <span class="original">฿590</span>
+              <span class="discount">-34%</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(328)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #1A237E;" title="กรมท่า"></span>
+              <span class="color-dot" style="background: #000;" title="ดำ"></span>
+              <span class="color-dot" style="background: #fff; border-color: #ccc;" title="ขาว"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_black.png" alt="เสื้อยืดคอกลม สีดำ" loading="lazy">
+            <span class="product-badge badge-sale">ลดราคา</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="2">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม Essential สีดำ คลาสสิก</p>
+            <div class="product-price">
+              <span class="current">฿350</span>
+              <span class="original">฿490</span>
+              <span class="discount">-29%</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(512)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #000;" title="ดำ"></span>
+              <span class="color-dot" style="background: #333;" title="เทาเข้ม"></span>
+              <span class="color-dot" style="background: #1A237E;" title="กรมท่า"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_white.png" alt="เสื้อยืดคอกลม สีขาว" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="3">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม Clean White ผ้านุ่ม</p>
+            <div class="product-price">
+              <span class="current">฿290</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="count">(189)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #fff; border-color: #ccc;" title="ขาว"></span>
+              <span class="color-dot" style="background: #F5F5DC;" title="ครีม"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_olive.png" alt="เสื้อยืดคอกลม สีเขียวทหาร" loading="lazy">
+            <span class="product-badge badge-best">ขายดี</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="4">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม Military Olive สีเขียวทหาร</p>
+            <div class="product-price">
+              <span class="current">฿420</span>
+              <span class="original">฿550</span>
+              <span class="discount">-24%</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(275)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #556B2F;" title="เขียวทหาร"></span>
+              <span class="color-dot" style="background: #8B4513;" title="น้ำตาล"></span>
+              <span class="color-dot" style="background: #000;" title="ดำ"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_burgundy.png" alt="เสื้อยืดคอกลม สีเบอร์กันดี" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="5">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม Burgundy Wine สีแดงเข้ม</p>
+            <div class="product-price">
+              <span class="current">฿450</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(147)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #722F37;" title="เบอร์กันดี"></span>
+              <span class="color-dot" style="background: #1A237E;" title="กรมท่า"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_gray.png" alt="เสื้อยืดคอกลม สีเทา" loading="lazy">
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="6">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม Heather Gray ใส่สบาย</p>
+            <div class="product-price">
+              <span class="current">฿320</span>
+              <span class="original">฿450</span>
+              <span class="discount">-29%</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="count">(203)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #A9A9A9;" title="เทา"></span>
+              <span class="color-dot" style="background: #D3D3D3;" title="เทาอ่อน"></span>
+              <span class="color-dot" style="background: #000;" title="ดำ"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_stripe.png" alt="เสื้อยืดลายทาง" loading="lazy">
+            <span class="product-badge badge-sale">ลดราคา</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="7">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดลายทาง Navy Stripe มาริน</p>
+            <div class="product-price">
+              <span class="current">฿380</span>
+              <span class="original">฿520</span>
+              <span class="discount">-27%</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(95)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: linear-gradient(90deg, #1A237E 50%, #fff 50%);" title="น้ำเงิน-ขาว"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card fade-in">
+          <div class="product-image">
+            <img src="images/tshirt_beige.png" alt="เสื้อยืดคอกลม สีเบจ" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="8">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืดคอกลม Sand Beige สีเบจทราย</p>
+            <div class="product-price">
+              <span class="current">฿350</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="count">(68)</span>
+            </div>
+            <div class="product-colors">
+              <span class="color-dot active" style="background: #D2B48C;" title="เบจ"></span>
+              <span class="color-dot" style="background: #fff; border-color: #ccc;" title="ขาว"></span>
+              <span class="color-dot" style="background: #556B2F;" title="เขียวทหาร"></span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <p class="ft-copy">© 2026 BLÜE. All rights reserved. — This is a sample website by ARI Project</p>
-</footer>
+  </section>
 
-<div class="sample-badge">ARI Project — Sample Website</div>
+  <!-- Promotion Banner -->
+  <section class="promo-banner" id="promo">
+    <div class="promo-pattern"></div>
+    <div class="container">
+      <div class="promo-content">
+        <div class="promo-text">
+          <h2>เซลส์ครั้งใหญ่ <span>ลดสูงสุด 50%</span></h2>
+          <p>โปรโมชั่นพิเศษ — ซื้อ 2 ชิ้น ลดทันที 20% | ซื้อ 3 ชิ้นขึ้นไป ลด 30%</p>
+          <div class="promo-timer" id="promoTimer">
+            <div class="timer-block">
+              <span class="timer-number" id="timerDays">03</span>
+              <span class="timer-label">วัน</span>
+            </div>
+            <div class="timer-block">
+              <span class="timer-number" id="timerHours">12</span>
+              <span class="timer-label">ชั่วโมง</span>
+            </div>
+            <div class="timer-block">
+              <span class="timer-number" id="timerMins">45</span>
+              <span class="timer-label">นาที</span>
+            </div>
+            <div class="timer-block">
+              <span class="timer-number" id="timerSecs">30</span>
+              <span class="timer-label">วินาที</span>
+            </div>
+          </div>
+          <a href="#products" class="btn btn-primary">ช้อปเลย</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
-window.addEventListener('scroll',function(){var n=document.querySelector('.nav');if(window.scrollY>60){n.style.boxShadow='0 2px 20px rgba(0,0,0,.04)';}else{n.style.boxShadow='none';}});
-</script>
+  <!-- New Arrivals -->
+  <section class="new-arrivals" id="new-arrivals">
+    <div class="container">
+      <div class="section-header thai-ornament">
+        <h2>สินค้ามาใหม่</h2>
+        <p class="subtitle">อัปเดตเทรนด์แฟชั่นล่าสุด</p>
+        <div class="section-divider">
+          <span></span>
+          <div class="diamond"></div>
+          <span></span>
+        </div>
+      </div>
+      <div class="arrivals-scroll">
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/tshirt_beige.png" alt="เสื้อยืด Sand Wave" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="9">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืด Sand Wave คอลเลกชั่น 2026</p>
+            <div class="product-price">
+              <span class="current">฿490</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(12)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/tshirt_burgundy.png" alt="เสื้อยืด Royal Red" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="10">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืด Royal Red พรีเมียมเกรด A</p>
+            <div class="product-price">
+              <span class="current">฿520</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(8)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/tshirt_olive.png" alt="เสื้อยืด Forest Green" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="11">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืด Forest Green ดีไซน์มินิมอล</p>
+            <div class="product-price">
+              <span class="current">฿450</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="count">(5)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/tshirt_stripe.png" alt="เสื้อยืด Marine Stripe" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="12">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืด Marine Stripe สไตล์ทะเล</p>
+            <div class="product-price">
+              <span class="current">฿480</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(15)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/tshirt_navy.png" alt="เสื้อยืด Midnight Blue" loading="lazy">
+            <span class="product-badge badge-new">ใหม่</span>
+            <button class="product-wishlist" aria-label="เพิ่มในรายการโปรด">♡</button>
+            <button class="product-quick-add" data-product="13">+ เพิ่มในตะกร้า</button>
+          </div>
+          <div class="product-info">
+            <p class="product-name">เสื้อยืด Midnight Blue ลิมิเต็ด</p>
+            <div class="product-price">
+              <span class="current">฿550</span>
+            </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">(3)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-box fade-in">
+        <h3>รับส่วนลดพิเศษ 10%</h3>
+        <p>สมัครรับข่าวสารและโปรโมชั่นก่อนใคร</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="กรอกอีเมลของคุณ..." required>
+          <button type="submit">สมัครเลย</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">THAI <span>VOGUE</span></div>
+          <p>เสื้อยืดผู้ชายสไตล์ไทย ผลิตจากผ้าฝ้ายออร์แกนิกเกรดส่งออก ออกแบบและตัดเย็บในประเทศไทย</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="#" aria-label="Line"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></a>
+            <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.2a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-.81.07 4.84 4.84 0 01-2.38-.62V2h3.45v.44a4.83 4.83 0 004.18 4.25v3.45a8.28 8.28 0 01-3.63-.85v.4z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>ช้อปปิ้ง</h4>
+          <ul>
+            <li><a href="#">เสื้อยืดผู้ชาย</a></li>
+            <li><a href="#">เสื้อยืดลาย</a></li>
+            <li><a href="#">เสื้อออกกำลังกาย</a></li>
+            <li><a href="#">โปโลชาย</a></li>
+            <li><a href="#">สินค้าลดราคา</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>บริการลูกค้า</h4>
+          <ul>
+            <li><a href="#">ติดต่อเรา</a></li>
+            <li><a href="#">การจัดส่ง</a></li>
+            <li><a href="#">นโยบายคืนสินค้า</a></li>
+            <li><a href="#">คำถามที่พบบ่อย</a></li>
+            <li><a href="#">วิธีเลือกไซส์</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>เกี่ยวกับเรา</h4>
+          <ul>
+            <li><a href="#">เรื่องราวของเรา</a></li>
+            <li><a href="#">บล็อก</a></li>
+            <li><a href="#">ร่วมงานกับเรา</a></li>
+            <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+            <li><a href="#">ข้อกำหนดการใช้งาน</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 THAI VOGUE. สงวนลิขสิทธิ์ทั้งหมด</p>
+        <div class="payment-methods">
+          <span>VISA / Mastercard</span>
+          <span>โอนเงิน</span>
+          <span>PromptPay</span>
+          <span>เก็บเงินปลายทาง</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="กลับขึ้นด้านบน">↑</button>
+
+  <script src="script.js"></script>
 </body>
 </html>
